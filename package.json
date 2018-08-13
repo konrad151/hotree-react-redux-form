@@ -23,7 +23,10 @@
     "path": "^0.12.7",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
+    "redux": "^4.0.0",
+    "redux-form": "^7.4.2",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"
   }

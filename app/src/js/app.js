@@ -1,31 +1,47 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+
+import { connect } from "react-redux";
+// import { formTaken } from "./actions/index";
+import { categoriesFetched } from './actions/index'
 
 import Header from './components/Header';
-import About from './components/About';
-import Coordinator from './components/Coordinator';
-import When from './components/When';
+import EventForm from './components/Form';
 
 
 
 class App extends React.Component {
-    constructor(){
-        super();
-        this.state = {};
+    componentDidMount() {
+        // fetch("./categories.json")
+
+        fetch(`./categories.json`, {
+            headers : { 
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+             }
+      
+          })
+            .then(res => res.json())
+            .then(json => this.props.categoriesFetched(json.results));
     }
+
     render() {
         return (
             <div>
                 <Header />
-                <About />
+                {/* <About />
                 <Coordinator />
-                <When />
+                <When /> */}
+                <EventForm categories={this.props.categories}/>
 
-                <button>Publish event</button>
             </div>
         );
     }
 }
-    
 
-ReactDom.render(<App/>,document.getElementById('app'))
+const mapStateToProps = (state) => {
+    return {    
+      categories: state.categories
+    }
+  };
+const mapDispatchToProps = { categoriesFetched };
+export const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);

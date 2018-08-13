@@ -74,3 +74,10 @@ button:hover {
   background: transparent;
   color: #355990;
 }
+button :disabled,
+button [disabled] {
+  background: #1e3b68;
+}
+#event-fee {
+  display: none;
+}

@@ -18,7 +18,7 @@ var gulpSequence = require('gulp-sequence')
 var browserSync = require('browser-sync');
 
 gulp.task('scripts', function() {
-	browserify('app/src/js/app.js')
+	browserify('app/src/js/index.js')
 	.transform('babelify', {
 		presets: ['env', 'react']
 	})
