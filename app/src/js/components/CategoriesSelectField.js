@@ -1,8 +1,8 @@
 import React from 'react';
 
-export const CategoriesSelectField = ({ categoryName }) => {
+export const CategoriesSelectField = ({ categoryName, categoryId }) => {
     return (
-        <option value={categoryName} key={categoryName}>
+        <option value={categoryId} key={categoryName}>
             {categoryName}
         </option>
     );
