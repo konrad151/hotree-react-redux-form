@@ -7,9 +7,3 @@ export const CategoriesSelectField = ({ categoryName, categoryId }) => {
         </option>
     );
 };
-
-// {category.map(categoryOption => (
-//     <option value={categoryOption} key={categoryOption}>
-//     {categoryOption}
-//     </option>
-// ))}

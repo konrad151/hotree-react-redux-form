@@ -9,7 +9,6 @@ export default class About extends React.Component {
                 <input
                     { ...field.input } type={field.type} placeholder={field.placeholder}
                     className={field.meta.error ? "error" : ""}
-                    // value={field.defaultValue}
                 />
                 { field.meta.touched ? <span className="error">{field.meta.error}</span> : ''}
             </span>
@@ -18,27 +17,16 @@ export default class About extends React.Component {
     renderRadioFree(field){
         return(
             <span>
-                {/* <input
-                    { ...field.input } type={field.type} placeholder={field.placeholder}
-                    className={field.meta.error ? "error" : ""}
-                    // value={field.defaultValue}
-                />
-                { field.meta.touched ? <span className="error">{field.meta.error}</span> : ''} */}
                 <input  { ...field.input } type={field.type} />
-
+                {'Free event'}
             </span>
         )
     }
     renderRadioPaid(field){
         return(
             <span>
-                {/* <input
-                    { ...field.input } type={field.type} placeholder={field.placeholder}
-                    className={field.meta.error ? "error" : ""}
-                    // value={field.defaultValue}
-                />
-                { field.meta.touched ? <span className="error">{field.meta.error}</span> : ''} */}
                 <input  { ...field.input } type={field.type} />
+                {' Paid event '}
                 { field.meta.touched ? <span className="error">{field.meta.error}</span> : ''}
             </span>
         )
@@ -68,41 +56,36 @@ export default class About extends React.Component {
 			}
 			return value;
 		};
-		// const normalizeNumber = value => {
-		// 	if (typeof value === "string" && value == '') {
-		// 		return "";
-		// 	}
-		// 	if (typeof value === "string") {
-		// 		return parseInt(value);
-		// 	}
-		// 	return value;
-		// };
         return (
             <section id="about" className="about">
                 <div className="container">
                     <div className="section-wrapper">
 
                         <h2>About</h2>
-                        <div className="about__title">
-                            <label htmlFor="title">Title</label>
+                        <div className="about__title d-flex">
+                            <h3 htmlFor="title">Title</h3>
                             <Field name="title" type="text" placeholder="Make it short and clear" component={this.RenderInput} />
                         </div>
-                        <div className="about__desciption">
-                            <label htmlFor="description">Description</label>
+                        <div className="about__desciption d-flex">
+                            <h3 htmlFor="description">Description</h3>
                             <Field name="description" type="text" placeholder="Write about your event, be creative" component={this.RenderInput}  />
                         </div>
-                        <div className="about__category">
-                            <label htmlFor="category_id">Category</label>
-                            <Field name="category_id" component="select">
-                                <option value="">Select category</option>
-                                {this.props.categories.map(categoriesToCategory)}
-                            </Field>
+                        <div className="about__category d-flex">
+                            <h3 htmlFor="category_id">Category</h3>
+                            <span>
+                                <Field name="category_id" component="select">
+                                    <option value="">Select category</option>
+                                    {this.props.categories.map(categoriesToCategory)}
+                                </Field>
+                                <div className="mini-description">
+                                    <p>Max length 140 characters</p>
+                                </div>
+                            </span>
                         </div>
-                        <div className="about__payment">
-                            <label>Payment</label>
+                        <div className="about__payment d-flex">
+                            <h3>Payment</h3>
                             <span className="formRadio">
-                                <label id="radio-free-event">
-                                    {'Free event'} 
+                                <label id="radio-free-event"> 
                                     <Field
                                         name="paid_event"
                                         type="radio"
@@ -110,16 +93,8 @@ export default class About extends React.Component {
                                         value={false}
                                         normalize={normalizeBooleanFree}
                                     />
-                                    {/* <Field
-                                        name="paid_event"
-                                        component="input"
-                                        type="radio"
-                                        value="false"
-                                        normalize={normalizeBooleanFree}
-                                    />{'Free event'} */}
                                 </label>
                                 <label id="radio-paid-event">
-                                    {' Paid event '}
                                     <Field
                                         name="paid_event"
                                         type="radio"
@@ -127,27 +102,19 @@ export default class About extends React.Component {
                                         value={true}
                                         normalize={normalizeBooleanPaid}
                                     />
-                                    {/* <Field
-                                        name="paid_event"
-                                        component="input"
-                                        type="radio"
-                                        value="true"
-                                        normalize={normalizeBooleanPaid}
-                                    />{' Paid event '} */}
                                 </label>
                                 <label id="event-fee">
                                     <Field
                                         name="event_fee"
                                         type="number"
                                         placeholder="Fee"
-                                        component={this.RenderInput} 
-                                        // normalize={normalizeNumber} 
+                                        component={this.RenderInput}
                                     />
                                 </label>
                             </span>
                         </div>
-                        <div className="about__reward">
-                            <label htmlFor="reward">Reward</label>
+                        <div className="about__reward d-flex">
+                            <h3 htmlFor="reward">Reward</h3>
                             <Field name="reward" type="number" placeholder="Number" component={this.RenderInput} />
                         </div>
 

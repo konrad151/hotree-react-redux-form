@@ -4,7 +4,7 @@ import { categories } from './categories';
 import { employes } from './employes';
 
 export default combineReducers({
-  form: reducerForm,
-  categories,
-  employes
+    form: reducerForm,
+    categories,
+    employes
 });

@@ -11,8 +11,6 @@ import EventForm from './components/Form';
 
 class App extends React.Component {
     componentDidMount() {
-        // fetch("./categories.json")
-
         fetch(`./categories.json`, {
             headers : { 
               'Content-Type': 'application/json',
@@ -30,9 +28,7 @@ class App extends React.Component {
             })
             .then(res => res.json())
             .then(json => this.props.employesFetched(json));
-        
     }
-
     render() {
         return (
             <div>

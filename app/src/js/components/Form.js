@@ -9,25 +9,19 @@ class EventForm extends React.Component {
         super(props);
     }
 	componentDidMount() {
-			const radioPaidEvent = document.querySelector("#radio-paid-event input");
-			const radioFreeEvent = document.querySelector("#radio-free-event input");
-			radioPaidEvent.addEventListener( 'change', function() {
-				if(this.checked) {
-					document.querySelector("#event-fee").style.display="inline";
-				}
-			});
-			radioFreeEvent.addEventListener( 'change', function() {
-				if(this.checked) {
-					document.querySelector("#event-fee").style.display="none";
-				}
-			});
-
-			// if (radioFreeEvent.checked === true) {
-
-			// } else {
-			// 	radioFreeEvent.checked = true
-			// }
-	  }
+		const radioPaidEvent = document.querySelector("#radio-paid-event input");
+		const radioFreeEvent = document.querySelector("#radio-free-event input");
+		radioPaidEvent.addEventListener( 'change', function() {
+			if(this.checked) {
+				document.querySelector("#event-fee").style.display="inline";
+			}
+		});
+		radioFreeEvent.addEventListener( 'change', function() {
+			if(this.checked) {
+				document.querySelector("#event-fee").style.display="none";
+			}
+		});
+	}
     onSubmit( wartosciZFormularz ) {
 		if (wartosciZFormularz.reward === undefined){
 			wartosciZFormularz.reward = null;
@@ -38,11 +32,11 @@ class EventForm extends React.Component {
 		if (wartosciZFormularz.id === undefined){
 			wartosciZFormularz.id = 3;
 		}
-		if (wartosciZFormularz.email === undefined){
-			wartosciZFormularz.email = null;
-		}
 		if (wartosciZFormularz.paid_event == false){
 			wartosciZFormularz.event_fee = null;
+		}
+		if (wartosciZFormularz.email === undefined){
+			wartosciZFormularz.email = null;
 		}
 		const results = JSON.parse(`
 		{
@@ -52,9 +46,10 @@ class EventForm extends React.Component {
 			"paid_event": ${wartosciZFormularz.paid_event},
 			"event_fee": ${wartosciZFormularz.event_fee},
 			"reward": ${wartosciZFormularz.reward},
+			"date": "${wartosciZFormularz.date}T${wartosciZFormularz.time}",
 			"coordinator": {
-				"email": ${JSON.stringify(wartosciZFormularz.email)},
-				"id": ${wartosciZFormularz.id}
+				"email": "${wartosciZFormularz.email}",
+				"id": "${wartosciZFormularz.id}"
 			}
 		}
 		`);
@@ -85,14 +80,15 @@ function validateForm(values){
 		errors.event_fee = 'Please enter price'
 	if ( values.paid_event === undefined )
 		errors.paid_event = 'Please choose one'
-
 	if ( values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email) )
 		errors.email = 'Invalid email address'
+	if ( values.date === undefined || values.time === undefined )
+		errors.time = 'Please choose date and time'
 
-  return errors
-} 
+  	return errors
+}
 
 export default reduxForm({
-  form: 'event',
-  validate: validateForm
+	form: 'event',
+	validate: validateForm
 })(EventForm);
