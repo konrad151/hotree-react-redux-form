@@ -26,7 +26,7 @@ gulp.task('scripts', function() {
 	.pipe(source('index.min.js'))
 	.pipe(buffer())
 	// Comment .pipe(uglify()) below for development
-	// .pipe(uglify())
+	.pipe(uglify())
 	.pipe(gulp.dest('app/dist/js'))
 	.pipe(browserSync.reload({stream: true}));
 });
