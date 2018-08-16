@@ -2,32 +2,70 @@ import React from 'react';
 import { Field } from 'redux-form';
 import { CategoriesSelectField } from './CategoriesSelectField';
 
+
+
 export default class About extends React.Component {
-    RenderInput(field){
+    constructor(){
+        super();
+        this.state = {
+            textareaValue: 0
+        };
+    }
+    handleChange(event) {
+        this.setState({ textareaValue: event.target.value.length });
+    }
+    renderInputTitle(field){
         return(
-            <span className="formInput">
+            <span className="title-field d-flex align-items-center">
                 <input
                     { ...field.input } type={field.type} placeholder={field.placeholder}
-                    className={field.meta.error ? "error" : ""}
                 />
                 { field.meta.touched ? <span className="error">{field.meta.error}</span> : ''}
             </span>
         )
     }
+    renderTextarea(field){
+        return(
+            <div className="d-flex align-items-center">
+                <textarea { ...field.input } placeholder={field.placeholder} maxLength={field.maxlength}></textarea>
+                { field.meta.touched ? <span className="error">{field.meta.error}</span> : ''}
+            </div>
+        )
+    }
     renderRadioFree(field){
         return(
-            <span>
+            <span id="radio-free-event">
                 <input  { ...field.input } type={field.type} />
-                {'Free event'}
+                {<span className="simple-text">Free event</span>}
             </span>
         )
     }
     renderRadioPaid(field){
         return(
-            <span>
+            <span id="radio-paid-event">
                 <input  { ...field.input } type={field.type} />
-                {' Paid event '}
+                {<span className="simple-text">Paid event</span>}
                 { field.meta.touched ? <span className="error">{field.meta.error}</span> : ''}
+            </span>
+        )
+    }
+    renderInputFee(field){
+        return(
+            <span className="fee-field d-flex align-items-center">
+                <input
+                    { ...field.input } type={field.type} placeholder={field.placeholder} />
+                <span className="simple-text">$</span>
+                { field.meta.touched ? <span className="error">{field.meta.error}</span> : ''}
+            </span>
+        )
+    }
+    renderInputReward(field){
+        return(
+            <span className="reward-field">
+                <input
+                    { ...field.input } type={field.type} placeholder={field.placeholder}
+                />
+                {<span className="simple-text">reward points for attendance</span>}
             </span>
         )
     }
@@ -62,60 +100,79 @@ export default class About extends React.Component {
                     <div className="section-wrapper">
 
                         <h2>About</h2>
-                        <div className="about__title d-flex">
-                            <h3 htmlFor="title">Title</h3>
-                            <Field name="title" type="text" placeholder="Make it short and clear" component={this.RenderInput} />
+                        <div className="about__title mb-15 d-flex">
+                            <h3 className="required">Title</h3>
+                            <span className="about__title-field w-80">
+                                <Field
+                                    name="title"
+                                    type="text"
+                                    placeholder="Make it short and clear"
+                                    component={this.renderInputTitle}
+                                />
+                            </span>
                         </div>
-                        <div className="about__desciption d-flex">
-                            <h3 htmlFor="description">Description</h3>
-                            <Field name="description" type="text" placeholder="Write about your event, be creative" component={this.RenderInput}  />
+                        <div className="about__desciption mb-15 d-flex">
+                            <h3 className="required">Description</h3>
+                            <span className="about__desciption-field w-80">
+                                <Field
+                                    name="description"
+                                    onChange={this.handleChange.bind(this)}
+                                    placeholder="Write about your event, be creative"
+                                    component={this.renderTextarea}
+                                    maxlength="140"
+                                />
+                                <div className="mini-description">
+                                    <span>Max length 140 characters</span>
+                                    <span className="mini-description-length">{this.state.textareaValue}/140</span>
+                                </div>
+                            </span>
                         </div>
-                        <div className="about__category d-flex">
-                            <h3 htmlFor="category_id">Category</h3>
-                            <span>
+                        <div className="about__category mb-35 d-flex">
+                            <h3>Category</h3>
+                            <span className="about__category-field w-80">
                                 <Field name="category_id" component="select">
                                     <option value="">Select category</option>
                                     {this.props.categories.map(categoriesToCategory)}
                                 </Field>
-                                <div className="mini-description">
-                                    <p>Max length 140 characters</p>
-                                </div>
                             </span>
                         </div>
-                        <div className="about__payment d-flex">
-                            <h3>Payment</h3>
-                            <span className="formRadio">
-                                <label id="radio-free-event"> 
-                                    <Field
-                                        name="paid_event"
-                                        type="radio"
-                                        component={this.renderRadioFree}
-                                        value={false}
-                                        normalize={normalizeBooleanFree}
-                                    />
-                                </label>
-                                <label id="radio-paid-event">
-                                    <Field
-                                        name="paid_event"
-                                        type="radio"
-                                        component={this.renderRadioPaid}
-                                        value={true}
-                                        normalize={normalizeBooleanPaid}
-                                    />
-                                </label>
-                                <label id="event-fee">
+                        <div className="about__payment mb-35 d-flex">
+                            <h3 className="required">Payment</h3>
+                            <span className="about__payment-field">
+                                <Field
+                                    name="paid_event"
+                                    type="radio"
+                                    component={this.renderRadioFree}
+                                    value={false}
+                                    normalize={normalizeBooleanFree}
+                                />
+                                <Field
+                                    name="paid_event"
+                                    type="radio"
+                                    component={this.renderRadioPaid}
+                                    value={true}
+                                    normalize={normalizeBooleanPaid}
+                                />
+                                <span id="event-fee">
                                     <Field
                                         name="event_fee"
                                         type="number"
                                         placeholder="Fee"
-                                        component={this.RenderInput}
+                                        component={this.renderInputFee}
                                     />
-                                </label>
+                                </span>
                             </span>
                         </div>
                         <div className="about__reward d-flex">
                             <h3 htmlFor="reward">Reward</h3>
-                            <Field name="reward" type="number" placeholder="Number" component={this.RenderInput} />
+                            <span className="about__reward-field">
+                                <Field
+                                    name="reward"
+                                    type="number"
+                                    placeholder="Number"
+                                    component={this.renderInputReward}
+                                />
+                            </span>
                         </div>
 
                     </div>

@@ -17,7 +17,7 @@ html body .container {
   padding: 2rem 4rem;
   border-radius: 5px;
   background: #FFF;
-  box-shadow: 0 0 5px 0px #e4e4e4;
+  box-shadow: 0 0 5px 0px #dadada;
 }
 h1 {
   font-weight: 300;
@@ -33,7 +33,7 @@ h2 {
 }
 h2:after {
   content: '';
-  border-bottom: 1px solid #e4e4e4;
+  border-bottom: 1px solid #dadada;
   width: 100%;
   display: block;
   padding-top: 1rem;
@@ -41,22 +41,120 @@ h2:after {
 h3 {
   color: #9fb2cd;
   font-weight: 400;
-  display: inline-block;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   margin: 0;
-  width: 12rem;
-  margin-bottom: 2rem;
+  width: 20%;
   padding-top: 10px;
   text-transform: uppercase;
+}
+h3.required:after {
+  content: " *";
+  color: red;
 }
 .d-flex {
   display: flex;
 }
+.d-inline-flex {
+  display: inline-flex;
+}
+.align-items-center {
+  align-items: center;
+}
+.w-100 {
+  width: 100%;
+}
+.w-80 {
+  width: 80%;
+}
+.mb-15 {
+  margin-bottom: 1.5rem;
+}
+.mb-35 {
+  margin-bottom: 3.5rem;
+}
 input[type="text"],
 input[type="number"],
-select {
+input[type="date"],
+input[type="time"],
+select,
+textarea {
   padding: 9px 9px;
-  border: 1px solid #e4e4e4;
+  border: 1px solid #dadada;
+  width: 70%;
+  box-sizing: border-box;
+}
+input[type="text"]::placeholder,
+input[type="number"]::placeholder,
+input[type="date"]::placeholder,
+input[type="time"]::placeholder,
+select::placeholder,
+textarea::placeholder {
+  font-size: 1.5rem;
+  color: #c5c5c5;
+}
+textarea {
+  min-height: 135px;
+  resize: none;
+}
+input[type="date"],
+input[type="time"] {
+  width: auto;
+}
+input[type="number"] {
+  width: 95px;
+}
+span.simple-text {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #676767;
+  margin: 0 10px;
+}
+.about__payment {
+  height: 35px;
+}
+.about__payment h3 {
+  display: flex;
+  align-items: center;
+  padding-top: 0;
+}
+.about__payment .about__payment-field {
+  display: inline-flex;
+}
+.about__payment #radio-paid-event {
+  margin: 0 15px;
+}
+.about__payment #radio-paid-event,
+.about__payment #radio-free-event {
+  display: inline-flex;
+  align-items: center;
+}
+.about__payment #radio-paid-event span.simple-text,
+.about__payment #radio-free-event span.simple-text {
+  display: flex;
+  align-items: center;
+}
+.about__payment #radio-paid-event span.error,
+.about__payment #radio-free-event span.error {
+  display: flex;
+  align-items: center;
+}
+.about__payment #radio-paid-event input[type="radio"],
+.about__payment #radio-free-event input[type="radio"] {
+  width: 17px;
+  height: 17px;
+  margin: 0;
+}
+.mini-description {
+  width: 70%;
+}
+.mini-description span {
+  margin-bottom: 0;
+  margin-top: 5px;
+  color: #dadada;
+  font-style: italic;
+}
+.mini-description span.mini-description-length {
+  float: right;
 }
 header {
   padding-bottom: 4rem;
@@ -78,7 +176,7 @@ button {
   right: 0;
   display: block;
   padding: 1rem 2rem;
-  box-shadow: 0 0 5px 0px #e4e4e4;
+  box-shadow: 0 0 5px 0px #dadada;
   border: 0;
   background: #355990;
   color: #FFF;
@@ -103,4 +201,15 @@ button [disabled] {
 }
 #event-fee {
   display: none;
+}
+span.error {
+  color: red;
+  padding-left: 10px;
+}
+input[type="text"].error,
+textarea.error {
+  border: 1px solid red;
+}
+form {
+  padding-bottom: 3rem;
 }

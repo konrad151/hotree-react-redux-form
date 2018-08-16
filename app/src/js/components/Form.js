@@ -22,38 +22,61 @@ class EventForm extends React.Component {
 			}
 		});
 	}
-    onSubmit( wartosciZFormularz ) {
-		if (wartosciZFormularz.reward === undefined){
-			wartosciZFormularz.reward = null;
+    onSubmit( fieldValue ) {
+
+		if (fieldValue.reward === undefined){
+			fieldValue.reward = null;
 		}
-		if (wartosciZFormularz.category_id === undefined){
-			wartosciZFormularz.category_id = null;
+		if (fieldValue.category_id === undefined){
+			fieldValue.category_id = null;
 		}
-		if (wartosciZFormularz.id === undefined){
-			wartosciZFormularz.id = 3;
+		if (fieldValue.id === undefined){
+			fieldValue.id = 3;
 		}
-		if (wartosciZFormularz.paid_event == false){
-			wartosciZFormularz.event_fee = null;
+		if (fieldValue.paid_event == false){
+			fieldValue.event_fee = null;
 		}
-		if (wartosciZFormularz.email === undefined){
-			wartosciZFormularz.email = null;
+		if (fieldValue.email === undefined){
+			fieldValue.email = null;
 		}
+
+		let durationInSeconds;
+		if (fieldValue.duration === undefined ){
+			durationInSeconds = null;
+		} else {
+			durationInSeconds = fieldValue.duration * 60 * 60;
+			fieldValue.duration = fieldValue.duration;
+		}
+
 		const results = JSON.parse(`
 		{
-			"title": "${wartosciZFormularz.title}",
-			"description": "${wartosciZFormularz.description}",
-			"category_id": ${wartosciZFormularz.category_id},
-			"paid_event": ${wartosciZFormularz.paid_event},
-			"event_fee": ${wartosciZFormularz.event_fee},
-			"reward": ${wartosciZFormularz.reward},
-			"date": "${wartosciZFormularz.date}T${wartosciZFormularz.time}",
+			"title": "${fieldValue.title}",
+			"description": "${fieldValue.description}",
+			"category_id": ${fieldValue.category_id},
+			"paid_event": ${fieldValue.paid_event},
+			"event_fee": ${fieldValue.event_fee},
+			"reward": ${fieldValue.reward},
+			"date": "${fieldValue.date}T${fieldValue.time}",
+			"duration": ${durationInSeconds},
 			"coordinator": {
-				"email": "${wartosciZFormularz.email}",
-				"id": "${wartosciZFormularz.id}"
+				"email": "${fieldValue.email}",
+				"id": "${fieldValue.id}"
 			}
 		}
 		`);
 		console.log(results);
+		document.querySelector('form').innerHTML = `
+			<section id="success" class="success">
+				<div class="container">
+					<div class="section-wrapper">
+
+						<h2>Success</h2>
+						<p>Event has been created, check console</p>
+						
+					</div>
+				</div>
+			</section>
+		`;
     }
     render(){
         const { handleSubmit } = this.props

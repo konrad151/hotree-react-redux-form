@@ -3,6 +3,10 @@
 @secondary: #9fb2cd;
 @background: #f7f7f7;
 @white: #FFF;
+@light-grey: #dadada;
+@placeholder: #c5c5c5;
+@black: #676767;
+
 
 html{
     color: @primary;
@@ -23,7 +27,7 @@ html{
     padding: 2rem 4rem;
     border-radius: 5px;
     background: @white;
-    box-shadow: 0 0 5px 0px #e4e4e4;
+    box-shadow: 0 0 5px 0px @light-grey;
 }
 h1{
     font-weight: 300;
@@ -39,7 +43,7 @@ h2{
 }
 h2:after{
     content: '';
-    border-bottom: 1px solid #e4e4e4;
+    border-bottom: 1px solid @light-grey;
     width: 100%;
     display: block;
     padding-top: 1rem;
@@ -47,22 +51,109 @@ h2:after{
 h3{
     color: @secondary;
     font-weight: 400;
-    display: inline-block;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     margin: 0;
-    width: 12rem;
-    margin-bottom: 2rem;
+    width: 20%;
     padding-top: 10px;
     text-transform: uppercase;
+    &.required{
+        &:after{
+            content: " *";
+            color: red;
+        }
+    }
 }
 
 .d-flex{
     display: flex;
 }
+.d-inline-flex{
+    display: inline-flex;
+}
+.align-items-center{
+    align-items: center;
+}
+.w-100{
+    width: 100%;
+}
+.w-80{
+    width: 80%;
+}
+.mb-15{
+    margin-bottom: 1.5rem;
+}
+.mb-35{
+    margin-bottom: 3.5rem;
+}
 
-input[type="text"], input[type="number"], select{
+input[type="text"], input[type="number"], input[type="date"], input[type="time"], select, textarea{
     padding: 9px 9px;
-    border: 1px solid #e4e4e4;
+    border: 1px solid @light-grey;
+    width: 70%;
+    box-sizing: border-box;
+    &::placeholder{
+        font-size: 1.5rem;
+        color: @placeholder;
+    }
+}
+textarea{
+    min-height: 135px;
+    resize: none;
+}
+input[type="date"], input[type="time"]{
+    width: auto;
+}
+input[type="number"]{
+    width: 95px;
+}
+span.simple-text{
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: @black;
+    margin: 0 10px;
+}
+.about__payment{
+    height: 35px;
+    h3{
+        display: flex;
+        align-items: center;
+        padding-top: 0;
+    }
+    .about__payment-field{
+        display: inline-flex;
+    }
+    #radio-paid-event{
+        margin: 0 15px;
+    }
+    #radio-paid-event, #radio-free-event{
+        display: inline-flex;
+        align-items: center;
+        span.simple-text{
+            display: flex;
+            align-items: center;
+        }
+        span.error{
+            display: flex;
+            align-items: center;
+        }
+        input[type="radio"]{
+            width: 17px;
+            height: 17px;
+            margin: 0;
+        }
+    }
+}
+.mini-description{
+    width: 70%;
+    span{
+        margin-bottom: 0;
+        margin-top: 5px;
+        color: @light-grey;
+        font-style: italic;
+    }
+    span.mini-description-length{
+        float: right;
+    }
 }
 
 header{
@@ -85,7 +176,7 @@ button{
     right: 0;
     display: block;
     padding: 1rem 2rem;
-    box-shadow: 0 0 5px 0px #e4e4e4;
+    box-shadow: 0 0 5px 0px @light-grey;
     border: 0;
     background: @primary;
     color: @white;
@@ -107,7 +198,16 @@ button{
         background: @primary-darken;
     }
 }
-
 #event-fee{
     display: none;
+}
+span.error{
+    color: red;
+    padding-left: 10px;
+}
+input[type="text"].error, textarea.error{
+    border: 1px solid red;
+}
+form{
+    padding-bottom: 3rem;
 }

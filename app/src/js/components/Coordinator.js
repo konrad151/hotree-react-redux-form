@@ -3,12 +3,11 @@ import { Field } from 'redux-form';
 import { EmployesSelectField } from './EmployesSelectField';
 
 export default class Coordinator extends React.Component {
-    RenderInput(field){
+    RenderInputEmail(field){
         return(
-            <span className="formInput">
+            <span className="email-field">
                 <input
                     { ...field.input } type={field.type} placeholder={field.placeholder}
-                    className={field.meta.error ? "error" : ""}
                 />
                 { field.meta.touched ? <span className="error">{field.meta.error}</span> : ''}
             </span>
@@ -33,16 +32,20 @@ export default class Coordinator extends React.Component {
                     <div className="section-wrapper">
 
                         <h2>Coordinator</h2>
-                        <div className="coordinator__employes">
-                            <label htmlFor="id">Responsible</label>
-                            <Field name="id" component="select">
-                                <option value={this.employesId = 3}>{this.employesName = "Walter"} {this.employesLastName = "Nelson"}</option>
-                                {this.props.employes.filter(notId3).map(employesToCategory)}
-                            </Field>
+                        <div className="coordinator__employes mb-15 d-flex">
+                            <h3 className="required">Responsible</h3>
+                            <span className="coordinator__employes-field w-80">
+                                <Field name="id" component="select">
+                                    <option value={this.employesId = 3}>{this.employesName = "Walter"} {this.employesLastName = "Nelson"}</option>
+                                    {this.props.employes.filter(notId3).map(employesToCategory)}
+                                </Field>
+                            </span>
                         </div>
-                        <div className="coordinator__email">
-                            <label htmlFor="email">Email</label>
-                            <Field name="email" type="text" placeholder="Email" component={this.RenderInput} />
+                        <div className="coordinator__email d-flex">
+                            <h3>Email</h3>
+                            <span className="coordinator__email-field w-80">
+                                <Field name="email" type="text" placeholder="Email" component={this.RenderInputEmail} />
+                            </span>
                         </div>
 
                     </div>
