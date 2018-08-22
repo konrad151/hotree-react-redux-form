@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "React application for creating events",
   "main": "index.html",
+  "scripts": {
+    "start": "gulp"
+  },
   "author": "Konrad Kacprzyk",
   "license": "ISC",
   "dependencies": {

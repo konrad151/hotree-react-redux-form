@@ -11,7 +11,8 @@ import EventForm from './components/Form';
 
 class App extends React.Component {
     componentDidMount() {
-        fetch(`./categories.json`, {
+        const proxy = "https://cors-anywhere.herokuapp.com/";
+        fetch(`${proxy}konrad151.usermd.net/json-files/categories.json`, {
             headers : { 
               'Content-Type': 'application/json',
               'Accept': 'application/json'
@@ -20,7 +21,7 @@ class App extends React.Component {
             .then(res => res.json())
             .then(json => this.props.categoriesFetched(json));
 
-        fetch(`./employes.json`, {
+        fetch(`${proxy}konrad151.usermd.net/json-files/employes.json`, {
             headers : { 
               'Content-Type': 'application/json',
               'Accept': 'application/json'
